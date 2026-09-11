@@ -425,15 +425,17 @@
         }
         .card.red { color: var(--red); }
         .card .top-left {
-            position: absolute; top: 4px; left: 5px;
+            position: absolute; top: 0px; left: 7px;
+            display: block;
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 50px; font-weight: 800; line-height: 1;
+            font-size: 60px; font-weight: 800; line-height: 1;
+            font-variant-numeric: tabular-nums;
             text-shadow: 0 0 0.01px currentColor, 0 0 1px currentColor;
         }
         .card .center {
             position: absolute; top: 70%; left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 50px; line-height: 1; font-weight: 700;
+            font-size: 60px; line-height: 1; font-weight: 500;
             text-shadow: 0 0 1px currentColor;
         }
         .card.placeholder {
@@ -871,6 +873,7 @@
             <div id="winner-desc"></div>
         </div>
         <button id="btn-next-hand" class="start-btn" style="white-space:nowrap;">Next Hand &#9654;</button>
+        <div id="next-hand-countdown" style="margin-top:0.5em;font-size:0.85em;opacity:0.75;"></div>
     </div>
     </div>
 
@@ -1128,6 +1131,7 @@
                 : '';
             btnNextHand.style.display = '';
             winnerOverlay.style.display = 'flex';
+            startNextHandCountdown();
             // Reset bet tracking for next hand
             prevBets = {};
             prevPot  = 0;
@@ -1145,14 +1149,41 @@
         });
 
         socket.on('game_finished', (data) => {
+            cancelNextHandCountdown();
             winnerTitle.innerHTML = data.winner ? `&#127942; ${esc(data.winner)} wins the game!` : 'Game Over';
             winnerDesc.textContent = '';
             btnNextHand.style.display = 'none';
             winnerOverlay.style.display = 'flex';
         });
 
+        let _nextHandTimer = null;
+
+        function startNextHandCountdown() {
+            let secs = 7;
+            const el = document.getElementById('next-hand-countdown');
+            el.textContent = `Next hand in ${secs}…`;
+            _nextHandTimer = setInterval(() => {
+                secs--;
+                if (secs > 0) {
+                    el.textContent = `Next hand in ${secs}…`;
+                } else {
+                    clearInterval(_nextHandTimer);
+                    _nextHandTimer = null;
+                    el.textContent = '';
+                    winnerOverlay.style.display = 'none';
+                    socket.emit('next_hand', { token: tableToken });
+                }
+            }, 1000);
+        }
+
+        function cancelNextHandCountdown() {
+            if (_nextHandTimer) { clearInterval(_nextHandTimer); _nextHandTimer = null; }
+            document.getElementById('next-hand-countdown').textContent = '';
+        }
+
         btnStart.addEventListener('click',    () => socket.emit('start_game', { token: tableToken }));
         btnNextHand.addEventListener('click', () => {
+            cancelNextHandCountdown();
             winnerOverlay.style.display = 'none';
             socket.emit('next_hand', { token: tableToken });
         });
