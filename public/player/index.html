@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>RoyalTest</title>
+    <title>Couch Casino</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/png" href="/public/images/favicon.png" />
@@ -961,7 +961,7 @@
 <!-- ── SCREEN: JOIN ── -->
 <div id="join-screen" class="screen active">
     <div class="join-card">
-        <div class="join-logo">♠ RoyalTest</div>
+        <div class="join-logo">♠ Couch Casino</div>
         <div class="join-tagline">Texas Hold'em · Private Table</div>
         <div class="join-divider"></div>
         <div class="join-error" id="join-error"></div>
@@ -985,7 +985,7 @@
 
 <!-- ── SCREEN: LOBBY ── -->
 <div id="lobby-screen" class="screen">
-    <div class="lobby-logo">♠ RoyalTest</div>
+    <div class="lobby-logo">♠ Couch Casino</div>
     <div class="lobby-waiting">Waiting for host to start…</div>
     <div id="my-badge">···</div>
     <div class="lobby-list" id="lobby-list"></div>
@@ -1114,8 +1114,8 @@
     const btnRaiseCancel   = document.getElementById('btn-raise-cancel');
     const btnRaiseConfirm  = document.getElementById('btn-raise-confirm');
     const orientationLockOverlay = document.getElementById('orientation-lock-overlay');
-    const PLAYER_SESSION_KEY = 'royaltest.playerSessionId';
-    const PLAYER_NICKNAME_KEY = 'royaltest.playerNickname';
+    const PLAYER_SESSION_KEY = 'couchcasino.playerSessionId';
+    const PLAYER_NICKNAME_KEY = 'couchcasino.playerNickname';
     const tableToken = (new URLSearchParams(window.location.search).get('token') || '').toUpperCase();
 
     let myNickname = '';

@@ -1,6 +1,6 @@
-# RoyalTest
+# Couch Casino
 
-RoyalTest is a browser-based, private Texas Hold'em game with:
+Couch Casino is a browser-based, private Texas Hold'em game with:
 
 - a host screen (`/host`) for table control and game flow
 - a player screen (`/join`) for mobile-friendly actions
@@ -17,8 +17,8 @@ RoyalTest is a browser-based, private Texas Hold'em game with:
 Pulls the pre-built image from GitHub Container Registry and runs it locally. No cloning required.
 
 ```bash
-docker pull ghcr.io/idobaruch7/royaltest:nightly
-docker run --rm -p 5000:5000 ghcr.io/idobaruch7/royaltest:nightly
+docker pull ghcr.io/idobaruch7/couchcasino:nightly
+docker run --rm -p 5000:5000 ghcr.io/idobaruch7/couchcasino:nightly
 ```
 
 Then open:
@@ -34,8 +34,8 @@ If players join from other devices on your network, use your computer's LAN IP i
 Clone the repo, then build and run from source:
 
 ```bash
-git clone https://github.com/idobaruch7/royaltest.git
-cd royaltest
+git clone https://github.com/idobaruch7/couchcasino.git
+cd couchcasino
 docker compose up --build
 ```
 
@@ -68,16 +68,16 @@ Then open:
 
 You can configure runtime behavior with environment variables:
 
-- `ROYALTEST_SECRET_KEY`: Flask secret key (default: dev fallback)
-- `ROYALTEST_HOST`: bind host (default: `0.0.0.0`)
-- `ROYALTEST_PORT`: bind port (default: `5000`)
-- `ROYALTEST_DEBUG`: debug mode (`1/true/yes/on` to enable, default off)
-- `ROYALTEST_DATABASE_URL`: SQLAlchemy Postgres URL for runtime game state
+- `COUCHCASINO_SECRET_KEY`: Flask secret key (default: dev fallback)
+- `COUCHCASINO_HOST`: bind host (default: `0.0.0.0`)
+- `COUCHCASINO_PORT`: bind port (default: `5000`)
+- `COUCHCASINO_DEBUG`: debug mode (`1/true/yes/on` to enable, default off)
+- `COUCHCASINO_DATABASE_URL`: SQLAlchemy Postgres URL for runtime game state
 
 Example:
 
 ```bash
-ROYALTEST_SECRET_KEY="change-me" ROYALTEST_DEBUG=1 python3 server/app.py
+COUCHCASINO_SECRET_KEY="change-me" COUCHCASINO_DEBUG=1 python3 server/app.py
 ```
 
 ## Gameplay Flow

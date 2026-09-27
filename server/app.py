@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('ROYALTEST_SECRET_KEY', 'royaltest-dev-secret')
+app.config['SECRET_KEY'] = os.getenv('COUCHCASINO_SECRET_KEY', 'couchcasino-dev-secret')
 socketio = SocketIO(app, cors_allowed_origins='*')
 
 TOKEN_LENGTH = 8
@@ -595,9 +595,9 @@ def _request_sid() -> str:
 # ── Entry Point ───────────────────────────────────────────────────────────────
 
 if __name__ == '__main__':
-    bind_host = os.getenv('ROYALTEST_HOST', '0.0.0.0')
-    port = int(os.getenv('ROYALTEST_PORT', '5000'))
-    debug = os.getenv('ROYALTEST_DEBUG', '0').lower() in {'1', 'true', 'yes', 'on'}
+    bind_host = os.getenv('COUCHCASINO_HOST', '0.0.0.0')
+    port = int(os.getenv('COUCHCASINO_PORT', '5000'))
+    debug = os.getenv('COUCHCASINO_DEBUG', '0').lower() in {'1', 'true', 'yes', 'on'}
     local_ip = _get_local_ip()
     print()
     print(f'  Host page : http://localhost:{port}/host')

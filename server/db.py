@@ -9,7 +9,7 @@ DEFAULT_DB_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
     'game.db',
 )
-DB_PATH = os.getenv('ROYALTEST_DB_PATH', DEFAULT_DB_PATH)
+DB_PATH = os.getenv('COUCHCASINO_DB_PATH', DEFAULT_DB_PATH)
 
 
 def get_connection():
