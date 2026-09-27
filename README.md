@@ -121,3 +121,7 @@ mypy server
 
 - This project is designed for local/private play.
 - `game.db` is intentionally ignored by git.
+
+## Licenses
+- This project is distributed under the AGPL
+- `public/qrcode.min.js` is Copyright (c) 2012 davidshimjs, distributed under the MIT License (`LICENSE.MIT`)
