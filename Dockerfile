@@ -11,7 +11,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 
-RUN adduser -D couchcasino
+RUN adduser -D couchcasino \
     mkdir -p /data && \
     chown couchcasino:couchcasino /data /app
     
