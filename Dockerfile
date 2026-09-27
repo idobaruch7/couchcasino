@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11-alpine
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -10,20 +10,21 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-RUN groupadd --system couchcasino && \
-    useradd --system --gid couchcasino --create-home --home-dir /home/couchcasino couchcasino && \
+
+RUN adduser -D couchcasino
     mkdir -p /data && \
-    chown couchcasino:couchcasino /data
+    chown couchcasino:couchcasino /data /app
+    
+USER couchcasino
 
 COPY requirements.txt ./
 
-RUN python -m pip install --upgrade pip && \
-    python -m pip install -r requirements.txt
+RUN python -m pip install --no-cache -r requirements.txt 
+
 
 COPY public ./public
 COPY server ./server
 
-USER couchcasino
 
 EXPOSE 5000
 
