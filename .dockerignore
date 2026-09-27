@@ -16,3 +16,4 @@ AGENTS.md
 README.md
 compose.yaml
 Dockerfile
+**/__pycache__

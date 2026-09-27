@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11-alpine
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -10,20 +10,19 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-RUN groupadd --system royaltest && \
-    useradd --system --gid royaltest --create-home --home-dir /home/royaltest royaltest && \
+RUN adduser -D royaltest && \
     mkdir -p /data && \
-    chown royaltest:royaltest /data
+    chown royaltest:royaltest /data /app
 
 COPY requirements.txt ./
 
-RUN python -m pip install --upgrade pip && \
-    python -m pip install -r requirements.txt
+RUN python -m pip install --no-cache -r requirements.txt 
+
+USER royaltest
 
 COPY public ./public
 COPY server ./server
 
-USER royaltest
 
 EXPOSE 5000
 
