@@ -1,15 +1,15 @@
 services:
-  royaltest:
-    image: ghcr.io/idobaruch7/royaltest:nightly
+  couchcasino:
+    image: ghcr.io/idobaruch7/couchcasino:nightly
     build: .
     ports:
-      - '${ROYALTEST_PORT:-5000}:5000'
+      - '${COUCHCASINO_PORT:-5000}:5000'
     environment:
-      ROYALTEST_SECRET_KEY: ${ROYALTEST_SECRET_KEY:-royaltest-dev-secret}
-      ROYALTEST_HOST: 0.0.0.0
-      ROYALTEST_PORT: 5000
-      ROYALTEST_DEBUG: ${ROYALTEST_DEBUG:-0}
-      ROYALTEST_DATABASE_URL: ${ROYALTEST_DATABASE_URL:-postgresql+psycopg://royaltest@postgres:5432/royaltest}
+      COUCHCASINO_SECRET_KEY: ${COUCHCASINO_SECRET_KEY:-couchcasino-dev-secret}
+      COUCHCASINO_HOST: 0.0.0.0
+      COUCHCASINO_PORT: 5000
+      COUCHCASINO_DEBUG: ${COUCHCASINO_DEBUG:-0}
+      COUCHCASINO_DATABASE_URL: ${COUCHCASINO_DATABASE_URL:-postgresql+psycopg://couchcasino@postgres:5432/couchcasino}
     depends_on:
       postgres:
         condition: service_healthy
@@ -18,11 +18,11 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: royaltest
-      POSTGRES_USER: royaltest
+      POSTGRES_DB: couchcasino
+      POSTGRES_USER: couchcasino
       POSTGRES_HOST_AUTH_METHOD: trust
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U royaltest -d royaltest']
+      test: ['CMD-SHELL', 'pg_isready -U couchcasino -d couchcasino']
       interval: 10s
       timeout: 5s
       retries: 5
